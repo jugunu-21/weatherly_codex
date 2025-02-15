@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchWeatherData } from '../utils/weatherData';
+import { useWeather } from '../context/WeatherContext';
 
 interface WeatherData {
   current: {
@@ -16,22 +17,19 @@ interface WeatherData {
   };
 }
 
-interface Props {
-  city: string;
-}
-
-const WeatherCard = ({ city }: Props) => {
+const WeatherCard: React.FC = () => {
+  const { submittedCity } = useWeather();
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getWeather = async () => {
-      const data = await fetchWeatherData(city);
+      const data = await fetchWeatherData(submittedCity);
       setWeatherData(data);
       setLoading(false);
     };
     getWeather();
-  }, [city]);
+  }, [submittedCity]);
 
   if (loading) return <div>Loading...</div>;
   if (!weatherData) return <div>No weather data available</div>;

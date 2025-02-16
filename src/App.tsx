@@ -2,11 +2,8 @@ import './App.css'
 import WeatherCard from './components/WeatherCard'
 import SearchHistory from './components/SearchHistory'
 import { WeatherProvider, useWeather } from './context/WeatherContext'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { fetchWeatherData } from './utils/weatherData'
-
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,22 +13,18 @@ const queryClient = new QueryClient({
     }
   }
 })
-
 function WeatherApp() {
   const { city, setCity, setSubmittedCity, updateRecentSearches, setError, error } = useWeather();
-
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
     if (error) setError(null); // Clear error when user starts typing
   }
-
   const handleKeyPress = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       if (!city.trim()) {
         setError('Please enter a city name');
         return;
       }
-
       const result = await fetchWeatherData(city);
       if (result.success) {
         const fullCityName = result.data.location.name;
@@ -44,7 +37,6 @@ function WeatherApp() {
       }
     }
   };
-
   return (
     <>
       <SearchHistory />
@@ -67,7 +59,6 @@ function WeatherApp() {
     </>
   )
 }
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -77,5 +68,7 @@ function App() {
     </QueryClientProvider>
   )
 }
-
 export default App
+
+
+

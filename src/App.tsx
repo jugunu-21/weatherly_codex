@@ -38,12 +38,12 @@ function WeatherApp() {
     }
   };
   return (
-    <div className='h-full w-full flex flex-col md:flex-row p-4'>
+    <div className='  h-full w-full flex flex-col md:flex-row p-4 mt-6'>
       <div className='flex-1 order-2 md:order-1 flex justify-center'>
         <SearchHistory />
       </div>
     
-      <div className='flex-2 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-4 max-w-screen-2xl mx-auto min-w-0'>
+      <div className=' flex-2 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-2 max-w-screen-2xl mx-auto min-w-0'>
         <input
           type='text'
           value={city}

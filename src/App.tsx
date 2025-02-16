@@ -76,7 +76,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <WeatherProvider>
-        <div className="min-h-screen min-w-full bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-auto">
+        <div className="min-h-screen min-w-full bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-auto mt-6">
           <WeatherApp />
         </div>
       </WeatherProvider>

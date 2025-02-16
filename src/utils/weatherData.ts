@@ -12,7 +12,7 @@ export const fetchWeatherData = async (city: string) => {
     }
 
     const response = await fetch(
-      `${API_URL}/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes&days=10
+      `${API_URL}/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes&days=7
       `
     )
 

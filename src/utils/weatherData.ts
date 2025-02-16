@@ -11,7 +11,8 @@ export const fetchWeatherData = async (city: string) => {
     }
 
     const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`
+      `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes&days=10
+      `
     )
 
     if (!response.ok) {

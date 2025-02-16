@@ -2,20 +2,42 @@ import React from 'react';
 
 interface WeatherForecastProps {
   isCelsius: boolean;
+  forecast: {
+    forecastday: Array<{
+      date: string;
+      day: {
+        avgtemp_c: number;
+        avgtemp_f: number;
+        condition: {
+          icon: string;
+          text: string;
+        };
+      };
+    }>;
+  };
 }
 
-const WeatherForecast: React.FC<WeatherForecastProps> = ({ isCelsius }) => {
+const WeatherForecast: React.FC<WeatherForecastProps> = ({ isCelsius, forecast }) => {
+  const getDayName = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', { weekday: 'short' });
+  };
+
   return (
     <div className="mt-8 grid grid-cols-7 gap-2">
-      {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-        <div key={day} className="text-center">
-          <p className="text-xs">{day}</p>
+      {forecast.forecastday.map((day) => (
+        <div key={day.date} className="text-center">
+          <p className="text-xs">{getDayName(day.date)}</p>
           <div className="my-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
-            </svg>
+            <img 
+              src={day.day.condition.icon} 
+              alt={day.day.condition.text}
+              className="h-6 w-6 mx-auto"
+            />
           </div>
-          <p className="text-sm">31°{isCelsius ? 'C' : 'F'}</p>
+          <p className="text-sm">
+            {Math.round(isCelsius ? day.day.avgtemp_c : day.day.avgtemp_f)}°{isCelsius ? 'C' : 'F'}
+          </p>
         </div>
       ))}
     </div>

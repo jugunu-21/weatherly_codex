@@ -128,7 +128,7 @@ console.log("data",data)
         </div>
         
         <WeatherConditions windSpeed={data.current.wind_kph} />
-        <WeatherForecast isCelsius={isCelsius} />
+        <WeatherForecast isCelsius={isCelsius} forecast={data.forecast} />
       </div>
     </div>
   );

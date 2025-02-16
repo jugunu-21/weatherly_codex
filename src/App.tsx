@@ -43,7 +43,7 @@ function WeatherApp() {
         <SearchHistory />
       </div>
     
-      <div className='flex-1 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-4 max-w-screen-2xl mx-auto min-w-0'>
+      <div className='flex-2 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-4 max-w-screen-2xl mx-auto min-w-0'>
         <input
           type='text'
           value={city}

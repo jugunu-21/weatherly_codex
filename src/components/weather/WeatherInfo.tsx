@@ -24,7 +24,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
           alt={conditionText}
           className="w-16 h-16"
         />
-        <p className="ml-2 text-2xl">{conditionText}</p>
+        <p className="text-2xl">{conditionText}</p>
       </div>
       <div>
         <div className="flex items-center justify-end mb-2">
@@ -35,7 +35,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             rightLabel="°F"
           />
         </div>
-        <p className="text-4xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
+        <p className="text-2xl md:text-4xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
       </div>
     </div>
   );

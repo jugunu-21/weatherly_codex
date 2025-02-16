@@ -17,7 +17,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   onToggleUnit
 }) => {
   return (
-    <div className="flex items-center justify-end gap-12">
+    <div className="md:flex  items-center justify-end gap-12">
       <div className="flex items-center justify-end mt-2">
         <img 
           src={conditionIcon} 

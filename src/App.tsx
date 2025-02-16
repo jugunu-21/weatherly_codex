@@ -38,9 +38,12 @@ function WeatherApp() {
     }
   };
   return (
-    <div className='h-full w-full flex p-4'>
-      <SearchHistory />
-      <div className='flex-1 flex flex-col items-end gap-6 px-6 py-4 max-w-screen-2xl mx-auto min-w-0'>
+    <div className='h-full w-full flex flex-col md:flex-row p-4'>
+      <div className='flex-1 order-2 md:order-1 flex justify-center'>
+        <SearchHistory />
+      </div>
+    
+      <div className='flex-1 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-4 max-w-screen-2xl mx-auto min-w-0'>
         <input
           type='text'
           value={city}
@@ -63,7 +66,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <WeatherProvider>
-        <div className="h-screen w-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+        <div className="min-h-screen min-w-full bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-auto">
           <WeatherApp />
         </div>
       </WeatherProvider>

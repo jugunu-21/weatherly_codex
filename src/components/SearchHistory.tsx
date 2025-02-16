@@ -45,28 +45,29 @@ const SearchHistory: React.FC = () => {
   }
 
   return (
-    <div className='h-screen  pt-4 pb-11  '>
-    <div className="h-full rounded-3xl flex flex-col w-72 bg-white/5 backdrop-blur-lg p-4 border-r border-white/10 shadow-lg">
-      <h2 className="text-white text-xl mb-4 font-light">Recent Searches</h2>
-      <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
-        {cityWeathers.map((weather, index) => (
-          <button
-            key={`${weather.location.name}-${index}`}
-            onClick={() => handleCitySelect(weather.location.name)}
-            className="text-left p-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-white/5 backdrop-blur-md shadow-sm hover:shadow-md border border-white/5 hover:border-white/10"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-medium">{weather.location.name}</span>
-              <span className="text-lg font-light">{Math.round(weather.current.temp_c)}°</span>
-            </div>
-            <div className="flex items-center text-sm text-white/70">
-              <img src={weather.current.condition.icon} alt={weather.current.condition.text} className="w-6 h-6 mr-2" />
-              <span>{weather.current.condition.text}</span>
-            </div>
-          </button>
-        ))}
+    <div className='flex justify-center items-start h-full'>
+      <div className="h-full rounded-3xl flex flex-col w-72 bg-white/5 backdrop-blur-lg p-4 border-r border-white/10 shadow-lg">
+        <h2 className="text-white text-xl mb-4 font-light">Recent Searches</h2>
+        <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
+          {cityWeathers.map((weather, index) => (
+            <button
+              key={`${weather.location.name}-${index}`}
+              onClick={() => handleCitySelect(weather.location.name)}
+              className="text-left p-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-white/5 backdrop-blur-md shadow-sm hover:shadow-md border border-white/5 hover:border-white/10"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-medium">{weather.location.name}</span>
+                <span className="text-lg font-light">{Math.round(weather.current.temp_c)}°</span>
+              </div>
+              <div className="flex items-center text-sm text-white/70">
+                <img src={weather.current.condition.icon} alt={weather.current.condition.text} className="w-6 h-6 mr-2" />
+                <span>{weather.current.condition.text}</span>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
-    </div></div>
+    </div>
   );
 };
 

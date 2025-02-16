@@ -8,7 +8,7 @@ interface WeatherHeaderProps {
 const WeatherHeader: React.FC<WeatherHeaderProps> = ({ cityName, localTime }) => {
   return (
     <div>
-      <h1 className="text-4xl font-light">{cityName}</h1>
+      <h1 className=" text-xl md:text-3xl font-light">{cityName}</h1>
       <p className="text-sm opacity-80">{localTime}</p>
     </div>
   );

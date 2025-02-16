@@ -17,7 +17,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   onToggleUnit
 }) => {
   return (
-    <div className="md:flex  items-center justify-end gap-12">
+    <div className=" flex flex-col justify-end  ">
       <div className="flex items-center justify-end mt-2">
         <img 
           src={conditionIcon} 
@@ -26,7 +26,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
         />
         <p className="text-2xl">{conditionText}</p>
       </div>
-      <div>
+     
         <div className="flex items-center justify-end mb-2">
           <ToggleButton
             isActive={isCelsius}
@@ -35,8 +35,8 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             rightLabel="°F"
           />
         </div>
-        <p className="text-2xl md:text-4xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
-      </div>
+        <p className="text-4xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
+
     </div>
   );
 };

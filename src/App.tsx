@@ -49,13 +49,14 @@ function WeatherApp() {
       </div>
     
       <div className=' flex-2 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-2 max-w-screen-2xl mx-auto min-w-0'>
-        <div className="flex gap-2 items-center w-full justify-end">
+        <div className=" pl-2 flex gap-2 items-center justify-between w-full ">
         <ToggleButton
             isActive={isCelsius}
             onToggle={toggleTemperatureUnit}
             leftLabel="°C"
             rightLabel="°F"
           />
+          <div className='flex gap-2 '>
           <LocationDetector />
           <input
             type='text'
@@ -65,7 +66,7 @@ function WeatherApp() {
             placeholder='Enter city name'
             className='w-80 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40'
           />
-        </div>
+        </div></div>
         <WeatherCard />
       </div>
     </div>

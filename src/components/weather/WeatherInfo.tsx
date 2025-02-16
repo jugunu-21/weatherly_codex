@@ -17,21 +17,18 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
  
 }) => {
   return (
-    <div className=" flex flex-col justify-end  ">
-      <div className="flex items-center justify-end mt-2">
-        <img 
+    <div className=" flex   items-center ">
+       <img 
           src={conditionIcon} 
           alt={conditionText}
-          className="w-16 h-16"
+          className="w-32 h-32"
         />
+      <div className="flex-col items-center justify-end ">
+       
         <p className="text-2xl">{conditionText}</p>
-      </div>
-{/*      
-        <div className="flex items-center justify-end mb-2">
-         
-        </div> */}
+    
         <p className="text-4xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
-
+        </div>
     </div>
   );
 };

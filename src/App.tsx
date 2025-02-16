@@ -49,7 +49,7 @@ function WeatherApp() {
       </div>
     
       <div className=' flex-2 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-2 max-w-screen-2xl mx-auto min-w-0'>
-        <div className=" pl-2 flex gap-2 items-center justify-between w-full ">
+        <div className=" px-2 flex gap-2 items-center justify-between w-full ">
         <ToggleButton
             isActive={isCelsius}
             onToggle={toggleTemperatureUnit}

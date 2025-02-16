@@ -21,8 +21,10 @@ function WeatherApp() {
 
       const result = await fetchWeatherData(city);
       if (result.success) {
-        setSubmittedCity(city);
-        updateRecentSearches(city);
+        const fullCityName = result.data.location.name;
+        setCity(fullCityName);
+        setSubmittedCity(fullCityName);
+        updateRecentSearches(fullCityName);
         setError(null);
       } else {
         setError(result.error || 'City not found. Please check the spelling and try again.');

@@ -17,13 +17,13 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
  
 }) => {
   return (
-    <div className=" flex   items-center ">
+    <div className=" flex justify-between  items-center ">
        <img 
           src={conditionIcon} 
           alt={conditionText}
           className="w-32 h-32"
         />
-      <div className="flex-col items-center justify-end ">
+      <div className="flex-col items-center justify-between pr-10">
        
         <p className="text-2xl">{conditionText}</p>
     

@@ -107,7 +107,7 @@ console.log("data",data)
   return (
     <div className="w-full h-full max-w-4xl mx-auto text-white flex-1 flex">
       <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 sm:p-8 shadow-lg border border-white/10 hover:bg-white/15 transition-all duration-300 w-full">
-        <div className="flex justify-between items-start mb-8">
+        <div className="flex flex-col justify-end items-center md:flex-row md:justify-between md:items-start mb-8">
           <WeatherHeader
             cityName={data.location.name}
             localTime={data.location.localtime}

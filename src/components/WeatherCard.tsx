@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchWeatherData } from '../utils/weatherData';
 import { useWeather } from '../context/WeatherContext';
+import ToggleButton from './ToggleButton';
 
 interface WeatherData {
   current: {
@@ -18,9 +19,13 @@ interface WeatherData {
 }
 
 const WeatherCard: React.FC = () => {
-  const { submittedCity, setError, error, clearError } = useWeather();
+  const { submittedCity, setError, error, clearError, isCelsius, toggleTemperatureUnit } = useWeather();
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const convertToFahrenheit = (celsius: number) => {
+    return (celsius * 9/5) + 32;
+  };
 
   useEffect(() => {
     const getWeather = async () => {
@@ -67,12 +72,6 @@ const WeatherCard: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-green-800 text-white flex items-center justify-center">
         <div className="bg-red-500/20 backdrop-blur-md p-4 rounded-lg border border-red-500/30 text-center">
           <p className="text-lg">{error}</p>
-          {/* <button
-            onClick={clearError}
-            className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded transition-colors"
-          >
-            Try Again
-          </button> */}
         </div>
       </div>
     );
@@ -86,6 +85,8 @@ const WeatherCard: React.FC = () => {
     );
   };
 
+  const temperature = isCelsius ? weatherData.current.temp_c : convertToFahrenheit(weatherData.current.temp_c);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-green-800 text-white p-4 sm:p-8">
       <div className="w-full max-w-full mx-auto bg-white/10 backdrop-blur-md rounded-3xl p-4 sm:p-8 shadow-lg">
@@ -95,7 +96,15 @@ const WeatherCard: React.FC = () => {
             <p className="text-sm opacity-80">{weatherData.location.localtime}</p>
           </div>
           <div className="text-right">
-            <p className="text-6xl font-light">{Math.round(weatherData.current.temp_c)}°</p>
+            <div className="flex items-center justify-end mb-2">
+              <ToggleButton
+                isActive={isCelsius}
+                onToggle={toggleTemperatureUnit}
+                leftLabel="°C"
+                rightLabel="°F"
+              />
+            </div>
+            <p className="text-6xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
             <div className="flex items-center justify-end mt-2">
               <img 
                 src={weatherData.current.condition.icon} 
@@ -123,7 +132,7 @@ const WeatherCard: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
                 </svg>
               </div>
-              <p className="text-sm">31°</p>
+              <p className="text-sm">31°{isCelsius ? 'C' : 'F'}</p>
             </div>
           ))}
         </div>

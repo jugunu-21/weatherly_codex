@@ -2,7 +2,20 @@ import './App.css'
 import WeatherCard from './components/WeatherCard'
 import SearchHistory from './components/SearchHistory'
 import { WeatherProvider, useWeather } from './context/WeatherContext'
-import { fetchWeatherData } from './utils/weatherData';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { fetchWeatherData } from './utils/weatherData'
+
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: 30000,
+    }
+  }
+})
 
 function WeatherApp() {
   const { city, setCity, setSubmittedCity, updateRecentSearches, setError, error } = useWeather();
@@ -57,9 +70,11 @@ function WeatherApp() {
 
 function App() {
   return (
-    <WeatherProvider>
+    <QueryClientProvider client={queryClient}>
+      <WeatherProvider>
       <WeatherApp />
-    </WeatherProvider>
+      </WeatherProvider>
+    </QueryClientProvider>
   )
 }
 

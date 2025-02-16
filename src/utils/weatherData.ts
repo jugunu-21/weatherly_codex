@@ -1,13 +1,17 @@
-const API_KEY = import.meta.env.VITE_API_KEY // Replace with your actual API key
-console.log("api_key",API_KEY)
+const API_KEY = import.meta.env.VITE_API_KEY
+
 export const fetchWeatherData = async (city: string) => {
   try {
+    if (!API_KEY) {
+      throw new Error('Weather API key is not configured. Please check your environment variables.')
+    }
+
     if (!city.trim()) {
       throw new Error('Please enter a city name')
     }
 
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`
+      `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`
     )
 
     if (!response.ok) {
@@ -20,7 +24,13 @@ export const fetchWeatherData = async (city: string) => {
     }
 
     const data = await response.json()
-    return { success: true, data }
+
+    // Validate the response structure
+    if (!data || !data.location || !data.current) {
+      throw new Error('Invalid weather data format received from the API')
+    }
+
+    return { success: true, data:data }
   } catch (error) {
     if (error instanceof Error) {
       return { success: false, error: error.message }

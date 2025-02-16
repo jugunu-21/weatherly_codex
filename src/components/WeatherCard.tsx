@@ -126,9 +126,13 @@ console.log("data",data)
             onToggleUnit={toggleTemperatureUnit}
           />
         </div>
-        
-        <WeatherConditions windSpeed={data.current.wind_kph} />
         <WeatherForecast isCelsius={isCelsius} forecast={data.forecast} />
+        <WeatherConditions 
+          windSpeed={data.current.wind_kph} 
+          humidity={data.current.humidity}
+          aqi={data.current.air_quality?.['us-epa-index']}
+        />
+       
       </div>
     </div>
   );

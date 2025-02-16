@@ -45,7 +45,7 @@ const SearchHistory: React.FC = () => {
   }
 
   return (
-    <div className='h-screen  pt-4 pb-10  '>
+    <div className='h-screen  pt-4 pb-11  '>
     <div className="h-full rounded-3xl flex flex-col w-72 bg-white/5 backdrop-blur-lg p-4 border-r border-white/10 shadow-lg">
       <h2 className="text-white text-xl mb-4 font-light">Recent Searches</h2>
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto">

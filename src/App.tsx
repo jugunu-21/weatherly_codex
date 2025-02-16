@@ -52,11 +52,11 @@ function WeatherApp() {
           placeholder='Enter city name'
           className='w-80 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40'
         />
-        {error && (
+        {/* {error && (
           <div className="w-full max-w-4xl p-4 bg-red-500/20 backdrop-blur-md rounded-lg border border-red-500/30 text-white text-center">
             <p>{error}</p>
           </div>
-        )}
+        )} */}
         <WeatherCard />
       </div>
     </div>

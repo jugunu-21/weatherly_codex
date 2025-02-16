@@ -1,4 +1,5 @@
 const API_KEY = import.meta.env.VITE_API_KEY
+const API_URL = import.meta.env.VITE_API_URL 
 
 export const fetchWeatherData = async (city: string) => {
   try {
@@ -11,7 +12,7 @@ export const fetchWeatherData = async (city: string) => {
     }
 
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes&days=10
+      `${API_URL}/v1/forecast.json?key=${API_KEY}&q=${city}&aqi=yes&days=10
       `
     )
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleButton from '../ToggleButton';
+
 
 interface WeatherInfoProps {
   temperature: number;
@@ -14,7 +14,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   conditionText,
   conditionIcon,
   isCelsius,
-  onToggleUnit
+ 
 }) => {
   return (
     <div className=" flex flex-col justify-end  ">
@@ -26,15 +26,10 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
         />
         <p className="text-2xl">{conditionText}</p>
       </div>
-     
+{/*      
         <div className="flex items-center justify-end mb-2">
-          <ToggleButton
-            isActive={isCelsius}
-            onToggle={onToggleUnit}
-            leftLabel="°C"
-            rightLabel="°F"
-          />
-        </div>
+         
+        </div> */}
         <p className="text-4xl font-light">{Math.round(temperature)}°{isCelsius ? 'C' : 'F'}</p>
 
     </div>

@@ -5,6 +5,7 @@ import LocationDetector from './components/LocationDetector'
 import { WeatherProvider, useWeather } from './context/WeatherContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { fetchWeatherData } from './utils/weatherData'
+import ToggleButton from './components/ToggleButton'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,7 +18,8 @@ const queryClient = new QueryClient({
 })
 
 function WeatherApp() {
-  const { city, setCity, setSubmittedCity, updateRecentSearches, setError, error } = useWeather();
+  
+  const { city, setCity,toggleTemperatureUnit, setSubmittedCity,isCelsius, updateRecentSearches, setError, error } = useWeather();
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
     if (error) setError(null); // Clear error when user starts typing
@@ -48,6 +50,12 @@ function WeatherApp() {
     
       <div className=' flex-2 order-1 md:order-2 flex flex-col items-end gap-6 px-6 py-2 max-w-screen-2xl mx-auto min-w-0'>
         <div className="flex gap-2 items-center w-full justify-end">
+        <ToggleButton
+            isActive={isCelsius}
+            onToggle={toggleTemperatureUnit}
+            leftLabel="°C"
+            rightLabel="°F"
+          />
           <LocationDetector />
           <input
             type='text'

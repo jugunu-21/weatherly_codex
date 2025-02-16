@@ -18,21 +18,65 @@ interface WeatherData {
 }
 
 const WeatherCard: React.FC = () => {
-  const { submittedCity } = useWeather();
+  const { submittedCity, setError, error, clearError } = useWeather();
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getWeather = async () => {
-      const data = await fetchWeatherData(submittedCity);
-      setWeatherData(data);
+      if (!submittedCity) {
+        setError('Please enter a city name');
+        setWeatherData(null);
+        setLoading(false);
+        return;
+      }
+
+      clearError();
+      setLoading(true);
+      const result = await fetchWeatherData(submittedCity);
+      if (result.success) {
+        setWeatherData(result.data);
+        setError(null);
+      } else {
+        setError(result.error || 'Unable to fetch weather data. Please try again.');
+        setWeatherData(null);
+      }
       setLoading(false);
     };
     getWeather();
-  }, [submittedCity]);
+  }, [submittedCity, clearError]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!weatherData) return <div>No weather data available</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-green-800 text-white flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-green-800 text-white flex items-center justify-center">
+        <div className="bg-red-500/20 backdrop-blur-md p-4 rounded-lg border border-red-500/30 text-center">
+          <p className="text-lg">{error}</p>
+          {/* <button
+            onClick={clearError}
+            className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded transition-colors"
+          >
+            Try Again
+          </button> */}
+        </div>
+      </div>
+    );
+  }
+
+  if (!weatherData) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-green-800 text-white flex items-center justify-center">
+        <div className="text-xl">No weather data available</div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-green-800 text-white p-4 sm:p-8">

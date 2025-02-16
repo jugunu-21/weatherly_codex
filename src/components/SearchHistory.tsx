@@ -16,15 +16,18 @@ const SearchHistory: React.FC = () => {
   useEffect(() => {
     const fetchCitiesWeather = async () => {
       const weatherPromises = recentSearches.map(async (city) => {
-        const data = await fetchWeatherData(city);
-        return {
-          city,
-          temp: Math.round(data.current.temp_c),
-          condition: data.current.condition.text,
-          icon: data.current.condition.icon
-        };
+        const result = await fetchWeatherData(city);
+        if (result.success) {
+          return {
+            city,
+            temp: Math.round(result.data.current.temp_c),
+            condition: result.data.current.condition.text,
+            icon: result.data.current.condition.icon
+          };
+        }
+        return null;
       });
-      const weathers = await Promise.all(weatherPromises);
+      const weathers = (await Promise.all(weatherPromises)).filter((weather): weather is CityWeather => weather !== null);
       setCityWeathers(weathers);
     };
 

@@ -2,20 +2,33 @@ import './App.css'
 import WeatherCard from './components/WeatherCard'
 import SearchHistory from './components/SearchHistory'
 import { WeatherProvider, useWeather } from './context/WeatherContext'
+import { fetchWeatherData } from './utils/weatherData';
 
 function WeatherApp() {
-  const { city, setCity, setSubmittedCity, updateRecentSearches } = useWeather();
+  const { city, setCity, setSubmittedCity, updateRecentSearches, setError, error } = useWeather();
 
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCity(event.target.value)
+    setCity(event.target.value);
+    if (error) setError(null); // Clear error when user starts typing
   }
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      setSubmittedCity(city)
-      updateRecentSearches(city)
+      if (!city.trim()) {
+        setError('Please enter a city name');
+        return;
+      }
+
+      const result = await fetchWeatherData(city);
+      if (result.success) {
+        setSubmittedCity(city);
+        updateRecentSearches(city);
+        setError(null);
+      } else {
+        setError(result.error || 'City not found. Please check the spelling and try again.');
+      }
     }
-  }
+  };
 
   return (
     <>
@@ -29,6 +42,11 @@ function WeatherApp() {
           placeholder='Enter city name'
           className='w-full max-w-md px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40'
         />
+        {error && (
+          <div className="w-full max-w-md p-4 bg-red-500/20 backdrop-blur-md rounded-lg border border-red-500/30 text-white text-center">
+            <p>{error}</p>
+          </div>
+        )}
         <WeatherCard />
       </div>
     </>

@@ -30,37 +30,43 @@ const SearchHistory: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="fixed left-0 top-0 h-full w-64 bg-white/10 backdrop-blur-md p-4 border-r border-white/20">
+      <div className="h-full py-4 w-72 bg-white/5 backdrop-blur-lg p-4 border-r border-white/10 shadow-lg">
         <h2 className="text-white text-xl mb-4 font-light">Recent Searches</h2>
         <div className="flex flex-col gap-3">
-          <div className="text-white opacity-60">Loading...</div>
+          <div className="text-white/70 p-4 bg-white/5 backdrop-blur-md rounded-lg">
+            <div className="animate-pulse flex items-center justify-center">
+              <div className="h-5 w-5 mr-3 border-t-2 border-white/40 rounded-full animate-spin"></div>
+              <span>Loading...</span>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed left-0 top-0 h-full w-64 bg-white/10 backdrop-blur-md p-4 border-r border-white/20">
+    <div className='h-screen  pt-4 pb-10  '>
+    <div className="h-full rounded-3xl flex flex-col w-72 bg-white/5 backdrop-blur-lg p-4 border-r border-white/10 shadow-lg">
       <h2 className="text-white text-xl mb-4 font-light">Recent Searches</h2>
-      <div className="flex flex-col gap-3">
+      <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
         {cityWeathers.map((weather, index) => (
           <button
             key={`${weather.location.name}-${index}`}
             onClick={() => handleCitySelect(weather.location.name)}
-            className="text-left p-4 text-white hover:bg-white/20 rounded-lg transition-colors bg-white/5"
+            className="text-left p-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-white/5 backdrop-blur-md shadow-sm hover:shadow-md border border-white/5 hover:border-white/10"
           >
             <div className="flex items-center justify-between mb-2">
               <span className="font-medium">{weather.location.name}</span>
-              <span className="text-lg">{Math.round(weather.current.temp_c)}°</span>
+              <span className="text-lg font-light">{Math.round(weather.current.temp_c)}°</span>
             </div>
-            <div className="flex items-center text-sm text-white/80">
+            <div className="flex items-center text-sm text-white/70">
               <img src={weather.current.condition.icon} alt={weather.current.condition.text} className="w-6 h-6 mr-2" />
               <span>{weather.current.condition.text}</span>
             </div>
           </button>
         ))}
       </div>
-    </div>
+    </div></div>
   );
 };
 

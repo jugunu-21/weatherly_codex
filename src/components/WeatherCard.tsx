@@ -63,7 +63,7 @@ const WeatherCard: React.FC = () => {
   if (isLoading) {
     return (
       <div className="w-full max-w-4xl mx-auto text-white">
-        <div className="bg-white/10 backdrop-blur-md rounded-3xl p-4 sm:p-8 shadow-lg flex items-center justify-center">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 sm:p-8 shadow-lg flex items-center justify-center border border-white/10">
           <div className="animate-pulse flex items-center">
             <div className="h-6 w-6 mr-3 border-t-2 border-white rounded-full animate-spin"></div>
             <div className="text-xl">Loading weather data...</div>
@@ -75,15 +75,9 @@ const WeatherCard: React.FC = () => {
 
   if (error || isError) {
     return (
-      <div className="w-full max-w-4xl mx-auto text-white">
-        <div className="bg-red-500/20 backdrop-blur-md rounded-3xl p-4 sm:p-8 shadow-lg text-center">
+      <div className="w-full mx-auto text-white">
+        <div className="bg-red-500/20 backdrop-blur-xl rounded-3xl p-4 sm:p-8 shadow-lg text-center border border-red-500/20">
           <p className="text-lg mb-2">{error || 'Failed to load weather data'}</p>
-          {/* <button 
-            onClick={() => window.location.reload()} 
-            className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
-          >
-            Try Again
-          </button> */}
         </div>
       </div>
     );
@@ -92,16 +86,16 @@ console.log("data",data)
   if (!data || !data.current) {
     if (!submittedCity) {
       return (
-        <div className="w-full max-w-4xl mx-auto text-white">
-          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-4 sm:p-8 shadow-lg text-center">
+        <div className="w-full  mx-auto text-white">
+          <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 sm:p-8 shadow-lg text-center border border-white/10">
             <p className="text-lg">Please enter a city name to see weather information</p>
           </div>
         </div>
       );
     }
     return (
-      <div className="w-full max-w-4xl mx-auto text-white">
-        <div className="bg-white/10 backdrop-blur-md rounded-3xl p-4 sm:p-8 shadow-lg text-center">
+      <div className="w-full mx-auto text-white">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 sm:p-8 shadow-lg text-center border border-white/10">
           <p className="text-lg">No weather data available. Please try again.</p>
         </div>
       </div>
@@ -112,7 +106,7 @@ console.log("data",data)
 
   return (
     <div className="w-full max-w-4xl mx-auto text-white">
-      <div className="bg-white/10 backdrop-blur-md rounded-3xl p-4 sm:p-8 shadow-lg">
+      <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 sm:p-8 shadow-lg border border-white/10 hover:bg-white/15 transition-all duration-300">
         <div className="flex justify-between items-start mb-8">
           <WeatherHeader
             cityName={data.location.name}
@@ -132,7 +126,6 @@ console.log("data",data)
           humidity={data.current.humidity}
           aqi={data.current.air_quality?.['us-epa-index']}
         />
-       
       </div>
     </div>
   );

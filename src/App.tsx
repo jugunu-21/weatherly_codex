@@ -38,35 +38,37 @@ function WeatherApp() {
     }
   };
   return (
-    <>
+    <div className='h-full w-full flex p-4'>
       <SearchHistory />
-      <div className='w-full flex flex-col items-center gap-4 p-4 ml-64'>
+      <div className='flex-1 flex flex-col items-center gap-6 px-6 py-4 max-w-screen-2xl mx-auto min-w-0'>
         <input
           type='text'
           value={city}
           onChange={handleCityChange}
           onKeyPress={handleKeyPress}
           placeholder='Enter city name'
-          className='w-full max-w-md px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40'
+          className='w-full max-w-3xl px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40'
         />
         {error && (
-          <div className="w-full max-w-md p-4 bg-red-500/20 backdrop-blur-md rounded-lg border border-red-500/30 text-white text-center">
+          <div className="w-full max-w-4xl p-4 bg-red-500/20 backdrop-blur-md rounded-lg border border-red-500/30 text-white text-center">
             <p>{error}</p>
           </div>
         )}
         <WeatherCard />
       </div>
-    </>
+    </div>
   )
 }
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <WeatherProvider>
-      <WeatherApp />
+        <div className="h-screen w-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+          <WeatherApp />
+        </div>
       </WeatherProvider>
     </QueryClientProvider>
-  )
+  );
 }
 export default App
 

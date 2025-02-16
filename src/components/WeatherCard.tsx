@@ -43,7 +43,15 @@ const WeatherCard: React.FC = () => {
       }
       setLoading(false);
     };
+
+    // Initial fetch
     getWeather();
+
+    // Set up polling interval
+    const pollInterval = setInterval(getWeather, 30000); // 30 seconds
+
+    // Cleanup function
+    return () => clearInterval(pollInterval);
   }, [submittedCity, clearError]);
 
   if (loading) {
